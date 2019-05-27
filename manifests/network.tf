@@ -17,15 +17,15 @@ resource "azurerm_virtual_network" "main" {
 }
 
 resource "azurerm_subnet" "frontend" {
-  address_prefix = cidrsubnet(var.vnet_cidr, 8, 0)
-  name = "frontend"
-  resource_group_name = azurerm_resource_group.network.name
+  name                 = "frontend"
+  address_prefix       = cidrsubnet(var.vnet_cidr, 8, 0)
+  resource_group_name  = azurerm_resource_group.network.name
   virtual_network_name = azurerm_virtual_network.main.name
 }
 
 resource "azurerm_subnet" "backend" {
-  address_prefix = cidrsubnet(var.vnet_cidr, 8, 1)
-  name = "backend"
-  resource_group_name = azurerm_resource_group.network.name
+  name                 = "backend"
+  address_prefix       = cidrsubnet(var.vnet_cidr, 8, 0)
+  resource_group_name  = azurerm_resource_group.network.name
   virtual_network_name = azurerm_virtual_network.main.name
 }
