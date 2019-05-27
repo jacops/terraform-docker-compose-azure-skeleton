@@ -1,4 +1,3 @@
-.PHONY: bin data images modules stacks
 .DEFAULT_GOAL := build
 
 build:
@@ -19,21 +18,6 @@ backend-destroy:
 
 remove-local-backends:
 	find . -name "terraform.tfstate" -exec rm -r "{}" \;
-
-env-dev: remove-local-backends
-	cp -rf .env .env-prev
-	cp -rf .env-dev .env
-	bin/dev/tf-vars.sh dev
-
-env-qa: remove-local-backends
-	cp -rf .env .env-prev
-	cp -rf .env-qa .env
-	bin/dev/tf-vars.sh qa
-	
-env-prod: remove-local-backends
-	cp -rf .env .env-prev
-	cp -rf .env-prod .env
-	bin/dev/tf-vars.sh prod
 
 ##########################################################################
 #######################            JOBS            #######################
