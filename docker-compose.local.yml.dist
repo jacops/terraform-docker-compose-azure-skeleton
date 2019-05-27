@@ -19,15 +19,21 @@ services:
   backend-create:
     extends: terraform
     entrypoint: []
-    command: "../bin/backend/create.sh -e ${TF_VAR_environment} -s ${ARM_SUBSCRIPTION_ID} -l ${TF_VAR_location}"
+    environment:
+      ARM_SUBSCRIPTION_ID: "${ARM_SUBSCRIPTION_ID}"
+      ARM_LOCATION: "${ARM_LOCATION}"
+      ENVIRONMENT: "${ENVIRONMENT}"
+    command: "../bin/backend/create.sh -e ${ENVIRONMENT} -s ${ARM_SUBSCRIPTION_ID} -l ${ARM_LOCATION}"
     volumes:
       - az-data:/root/.azure
 
   backend-destroy:
     extends: terraform
-    image: terraform-skeleton
     entrypoint: []
-    command: "../bin/backend/destroy.sh -e ${TF_VAR_environment} -s ${ARM_SUBSCRIPTION_ID}"
+    environment:
+      ARM_SUBSCRIPTION_ID: "${ARM_SUBSCRIPTION_ID}"
+      ENVIRONMENT: "${ENVIRONMENT}"
+    command: "../bin/backend/destroy.sh -e ${ENVIRONMENT} -s ${ARM_SUBSCRIPTION_ID}"
     volumes:
       - az-data:/root/.azure
 
