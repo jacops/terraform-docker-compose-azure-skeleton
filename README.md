@@ -2,7 +2,7 @@
 
 ## Use locally
 
-To run terraform scripts locally you should use your own AD account, so that accountability is visualised in resource activity logs
+To run terraform scripts locally you should use your own AD account, so that accountability is visualised in resource activity logs. Otherwise use service accounts (likely with different permission models per stack) in CI/CD environemt of your choice.
 
 ### Prerequisites
 
