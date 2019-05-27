@@ -1,0 +1,35 @@
+version: '2.1'
+
+services:
+  terraform:
+    volumes:
+      - az-data:/root/.azure
+
+  terraform-init:
+    volumes:
+      - az-data:/root/.azure
+
+  az-login:
+    extends: terraform
+    entrypoint: []
+    command: az login
+    volumes:
+      - az-data:/root/.azure
+
+  backend-create:
+    extends: terraform
+    entrypoint: []
+    command: "../bin/backend/create.sh -e ${TF_VAR_environment} -s ${ARM_SUBSCRIPTION_ID} -l ${TF_VAR_location}"
+    volumes:
+      - az-data:/root/.azure
+
+  backend-destroy:
+    extends: terraform
+    image: terraform-skeleton
+    entrypoint: []
+    command: "../bin/backend/destroy.sh -e ${TF_VAR_environment} -s ${ARM_SUBSCRIPTION_ID}"
+    volumes:
+      - az-data:/root/.azure
+
+volumes:
+  az-data:
