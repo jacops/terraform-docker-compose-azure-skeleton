@@ -1,8 +1,6 @@
 #!/usr/bin/env sh
 
-set -e
-
-cd manifests
+set -euo pipefail
 
 terraform init \
     -backend-config="storage_account_name=${TF_VAR_terraform_storage_account_name}" \

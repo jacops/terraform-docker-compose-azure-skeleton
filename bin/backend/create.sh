@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 function usage {
     echo "Usage: $0 -e <env> -s <arm subscription id> -l <location>"; exit 1;
